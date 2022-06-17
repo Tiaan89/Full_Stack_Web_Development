@@ -43,13 +43,12 @@
 <div class="todos">
     <h1>{title}</h1>
 
-<form action="" method="" class="new">
-    <input type="text" name="text" aria-label="Add a todo" placeholder="+ type to add a todo" />
-</form>
+    <form action="" method="" class="new">
+        <input type="text" name="text" aria-label="Add a todo" placeholder="+ type to add a todo" />
+    </form>
 
-<TodoItem />
-<TodoItem />
-<TodoItem />
-
+    <TodoItem />
+    <TodoItem />
+    <TodoItem />
 </div>
 
