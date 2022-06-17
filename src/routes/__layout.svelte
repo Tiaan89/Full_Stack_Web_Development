@@ -1,10 +1,9 @@
 <script>
     import "../app.css";
-
 </script>
 
 <main>
-<slot />
+    <slot />
 </main>
 
 <footer>Copyright</footer>
