@@ -50,4 +50,3 @@
     <TodoItem />
     <TodoItem />
 </div>
-
