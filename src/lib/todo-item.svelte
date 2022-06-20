@@ -1,6 +1,5 @@
-
 <script lang="ts">
-    export let todo: Todo; //prop
+    export let todo: Todo; 
 </script>
 
 
@@ -92,27 +91,12 @@
         <button aria-label="Mark done/not done" class="toggle"></button>
     </form>
 
-    <form action="" method="" class="text">
-        <input type="text" />
-        <button aria-label="Save todo" class="save"></button>
-    </form>
-
-    <form action="" method="">
-        <button aria-label="Delete todo" class="delete"></button>
-
-<div>
-    <form action="" method="">
-        <input type="hidden" name="done" value="" />
-        <button aria-label="Mark done/not done" class="toggle"></button>
-    </form>
-
-    <form action="" method="" class="text">
+    <form action="/todos/{todo.uid}.json?_method=patch" method="post" class="text">
         <input type="text" value="{todo.text}"/>
         <button aria-label="Save todo" class="save"></button>
     </form>
 
-    <form action="" method="">
+    <form action="/todo/{todo.uid}.json?_method=delete" method="post">
         <button aria-label="Delete todo" class="delete"></button>
-        <button aria-label="Delete todo">Delete</button>
     </form>
 </div>

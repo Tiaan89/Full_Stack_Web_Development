@@ -20,15 +20,12 @@
 
 
 <script lang="ts">
-    import TodoItem from '../lib/todo-item.svelte';
+    import TodoItem from "../lib/todo-item.svelte";
+
     export let todos: Todo[];
 
     const title = "Todo";
 </script>
-
-<svelte:head>
-    <title>{title}</title>
-</svelte:head>
 
 <style>
     .todos {
@@ -62,6 +59,10 @@
     }
 </style>
 
+<svelte:head>
+    <title>{title}</title>
+</svelte:head>
+
 <div class="todos">
     <h1>{title}</h1>
 
@@ -70,14 +71,6 @@
     </form>
 
     {#each todos as todo}
-    <TodoItem {todo} />
-
+        <TodoItem {todo}/>
     {/each}
-    <form action="" method="" class="new">
-        <input type="text" name="text" aria-label="Add a todo" placeholder="+ type to add a todo" />
-    </form>
-
-    <TodoItem />
-    <TodoItem />
-    <TodoItem />
 </div>
