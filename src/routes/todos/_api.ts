@@ -1,25 +1,26 @@
 //https://github.com/sveltejs/kit/pull/3384
 
 import type { RequestHandler } from "@sveltejs/kit";
+import { dataset_dev } from "svelte/internal";
 import { api } from "./_api";
 
-export const del: RequestHandler = (request) => {
-    return api(request);
+export const del: RequestHandler = (event) => {
+    return api(event);
 }
 
-export const patch: RequestHandler<{}, FormData> = (request) => {
-    return api(request, {
-        text: request.body.name
+export const patch: RequestHandler<{}, FormData> = (event) => {
+    return api(event, {
+        text: event.body.name
     });
 }
 //todos: Persist in database
 let todos: Todo[] = [];
 
-export const api: (request: RequestHandler, data?: Record<string, unknown>) => {
+export const api: (event: RequestHandler, data?: Record<string, unknown>) => {
     let body = {};
     let status = 500;
 
-    switch (request.method.toUpperCase()) {
+    switch (event.method.toUpperCase()) {
             case "GET":
                 body =  todos;
                 status = 200;
@@ -32,14 +33,15 @@ export const api: (request: RequestHandler, data?: Record<string, unknown>) => {
                 break;      
 
             case "DELETE":
-                todos = todos.filter(todo => todo.uid !== request.params.uid)
+                todos = todos.filter(todo => todo.uid !== event.params.uid)
                 status =  200;
                 break;
 
             case "PATCH":
                 todos = todos.map(todo => {
-                    if(todo.uid === request.params.uid) {
-                        todo.text = data.text as string;
+                    if(todo.uid === event.params.uid) {
+                        if(data.text) todo.text = data.text as string;
+                        else todo.done = data.done as boolean;
                     }
                     return todo;
                 });
@@ -50,7 +52,7 @@ export const api: (request: RequestHandler, data?: Record<string, unknown>) => {
                 break;
         }
 
-        if (request.method.toUpperCase() !== "GET") {
+        if (event.method.toUpperCase() !== "GET") {
             return {
                     status: 300,
                     headers: {
