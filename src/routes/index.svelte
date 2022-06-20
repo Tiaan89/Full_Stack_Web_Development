@@ -73,4 +73,11 @@
     <TodoItem {todo} />
 
     {/each}
+    <form action="" method="" class="new">
+        <input type="text" name="text" aria-label="Add a todo" placeholder="+ type to add a todo" />
+    </form>
+
+    <TodoItem />
+    <TodoItem />
+    <TodoItem />
 </div>
