@@ -2,13 +2,12 @@
 
 import type { RequestHandler } from "@sveltejs/kit";
 import { dataset_dev } from "svelte/internal";
-import { api } from "./_api";
 
-export const del: RequestHandler = (event) => {
+export const del: RequestHandler = (event: any) => {
     return api(event);
 }
 
-export const patch: RequestHandler<{}, FormData> = (event) => {
+export const patch: RequestHandler<{}, FormData> = (event: any) => {
     return api(event, {
         text: event.body.name
     });
@@ -46,13 +45,15 @@ export const api: (event: RequestHandler, data?: Record<string, unknown>) => {
                     return todo;
                 });
                 status = 200;
+                body = todos.find(todo => todo.uid === event.params.uid);
                 break;
 
             default:
                 break;
         }
 
-        if (event.method.toUpperCase() !== "GET") {
+        if (event.method.toUpperCase() !== "GET" &&
+         event.headers.accepts !== "application/jason") { //if the event method is net get
             return {
                     status: 300,
                     headers: {
