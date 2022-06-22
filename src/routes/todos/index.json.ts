@@ -9,7 +9,6 @@ export const post = RequestHandler = async (event) => {
     //const formData = await request.formData();
 
     return api (event, {
-        uid: `${Date.now()}`, //replace with the UID from the DB
         created_at: new Date(),
         text: event.formData.name,
         done: false
